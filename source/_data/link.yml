@@ -1,0 +1,19 @@
+- class_name: 野生大佬
+  class_desc: 那些人，那些事
+  link_list:
+    - name: JerryC
+      link: https://jerryc.me/
+      avatar: https://jerryc.me/image/avatar.png
+      descr: 今日事,今日畢
+    - name: guguge
+      link: https://gugugu.top/
+      avatar: https://guguge.top/media/avatar.jpg
+      descr: 咕咕咕
+
+- class_name: 网站
+  class_desc: 一些值得推荐的站点
+  link_list:
+    - name: Hexo
+      link: https://hexo.io/zh-cn/
+      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+      descr: Hexo 网站生成框架
