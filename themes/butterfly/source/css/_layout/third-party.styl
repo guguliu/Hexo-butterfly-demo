@@ -9,13 +9,6 @@
     &:hover
       background: var(--btn-hover-color)
 
-  if hexo-config('valine.bg')
-    textarea
-      background: url(hexo-config('valine.bg')) 100% 100% no-repeat
-
-      &:focus
-        background-image: none
-
   .vimg
     transition: all .3s
 
@@ -26,6 +19,34 @@
     &:before,
     &:after
       z-index: 22
+
+#waline-wrap
+  --waline-font-size: 1.1em
+  --waline-theme-color: $button-bg
+  --waline-active-color: $button-hover-color
+  --waline-avatar-size: 2.75rem
+
+  .vuser
+    transition: all .5s
+
+    &:hover
+      transform: rotate(360deg)
+
+if hexo-config('valine.bg')
+  #vcomment
+    textarea
+      background: url(hexo-config('valine.bg')) 100% 100% no-repeat
+
+      &:focus
+        background-image: none
+
+if hexo-config('waline.bg')
+  #waline-wrap
+    textarea
+      background: url(hexo-config('waline.bg')) 100% 100% no-repeat
+
+      &:focus
+        background-image: none
 
 .fireworks
   position: fixed
@@ -69,14 +90,10 @@
       display: none
 
 // mathjax
-.mathjax-overflow
+mjx-container[display],
+.has-jax
   overflow-x: auto
   overflow-y: hidden
-
-mjx-container[jax='CHTML'][display='true']
-  overflow-x: auto
-  overflow-y: hidden
-  padding-bottom: .3rem
 
 .aplayer
   color: $font-black

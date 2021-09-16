@@ -152,6 +152,7 @@ no-beautify()
       text-decoration: underline
 
   img
+    display: block
     margin: 0 auto .8rem
 
   p
@@ -159,6 +160,20 @@ no-beautify()
 
   iframe
     margin: 0 0 1rem
+
+  kbd
+    margin: 0 3px
+    padding: 3px 5px
+    border: 1px solid #b4b4b4
+    border-radius: 3px
+    background-color: #f8f8f8
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25), 0 2px 1px 0 rgba(255, 255, 255, .6) inset
+    color: #34495e
+    white-space: nowrap
+    font-weight: 600
+    font-size: .9em
+    font-family: Monaco, 'Ubuntu Mono', monospace
+    line-height: 1em
 
   if hexo-config('beautify.enable') && hexo-config('beautify.field') == 'site'
     beautify()
@@ -170,10 +185,10 @@ no-beautify()
   else
     no-beautify()
 
-#post
-  img
-    display: block
+  > :last-child
+    margin-bottom: 0 !important
 
+#post
   .tag_share
     .post-meta
       &__tag-list
@@ -218,24 +233,13 @@ no-beautify()
     transition: box-shadow .3s ease-in-out
 
     &:before
+      @extend .fontawesomeIcon
       position: absolute
-      top: t = .5rem
-      right: t
-      width: w = .8rem
-      height: w
-      border-radius: w
-      background: $light-blue
-      content: ''
-
-    &:after
-      position: absolute
-      top: t = .7rem
-      right: t
-      width: w = .4rem
-      height: w
-      border-radius: w
-      background: var(--card-bg)
-      content: ''
+      top: .1rem
+      right: .6rem
+      color: $theme-color
+      content: '\f1f9'
+      font-size: 1rem
 
     &:hover
       box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5)
@@ -275,3 +279,6 @@ no-beautify()
         color: $noticeOutdate-border
         content: '\f071'
         transform: translateY(-50%)
+
+  .ads-wrap
+    margin: 2rem 0

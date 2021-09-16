@@ -1,4 +1,4 @@
-#aside_content
+#aside-content
   width: 25%
 
   +minWidth900()
@@ -10,10 +10,6 @@
   +maxWidth900()
     width: 100%
 
-  if hexo-config('aside.mobile') == false
-    +maxWidth768()
-      display: none
-
   > .card-widget:first-child
     margin-top: 0
 
@@ -24,24 +20,21 @@
     position: relative
     overflow: hidden
     margin-top: 1rem
+    padding: 1rem 1.2rem
     border-radius: 8px
     background: var(--card-bg)
-    box-shadow: 0 4px 8px 6px rgba(7, 17, 27, .06)
-    transition: all .3s
+    box-shadow: var(--card-box-shadow)
+    transition: box-shadow .3s
 
     &:hover
-      box-shadow: 0 4px 12px 12px rgba(7, 17, 27, .15)
+      box-shadow: var(--card-hover-box-shadow)
+
+    if hexo-config('aside.mobile') == false
+      +maxWidth768()
+        &:not(#card-toc)
+          display: none
 
   .card-info
-    img
-      width: 110px
-      height: 110px
-      border-radius: 70px
-      transition: all .5s
-
-      &:hover
-        transform: rotate(360deg)
-
     .author-info
       &__name
         font-weight: 500
@@ -52,7 +45,7 @@
 
     .card-info-data
       display: table
-      padding: .7rem 0
+      margin: .7rem 0 .2rem
       width: 100%
       table-layout: fixed
 
@@ -87,6 +80,7 @@
 
     #card-info-btn
       display: block
+      margin-top: .7rem
       background-color: var(--btn-bg)
       color: var(--btn-color)
       text-align: center
@@ -95,26 +89,24 @@
       span
         padding-left: .5rem
 
-  .card-content
-    padding: 1rem 1.2rem
-
   .item-headline
     padding-bottom: .3rem
     font-size: 1.2em
 
     span
-      margin-left: .5rem
+      margin-left: .3rem
 
   .sticky_layout
     +minWidth900()
       position: sticky
       position: -webkit-sticky
       top: 20px
+      transition: top .3s
 
   .card-tag-cloud
     a
       display: inline-block
-      padding: 0 .1rem
+      padding: 0 .2rem
 
       &:hover
         color: $text-hover !important
@@ -213,29 +205,20 @@
           width: 20%
           text-align: right
 
-    &.more
-      span
-        padding-right: .3rem
-        width: auto !important
-        transition: .5s
-
-      &:hover
-        span
-          padding-right: .6rem
-
   .card-categories
     .card-category-list
       &.child
         padding: 0 0 0 .8rem
 
       > .parent
-        .card-category-list
-          &-name
-            width: 70% !important
+        > a
+          .card-category-list
+            &-name
+              width: 70% !important
 
-          &-count
-            width: calc(100% - 70% - 20px)
-            text-align: right
+            &-count
+              width: calc(100% - 70% - 20px)
+              text-align: right
 
         i
           float: right
@@ -248,7 +231,7 @@
             transform: rotate(-90deg)
 
         if hexo-config('aside.card_categories.expand') == false
-          + .child
+          > .child
             display: none
 
   .card-webinfo
@@ -265,22 +248,36 @@
 
   // toc
   #card-toc
+    +minWidth901()
+      right: 0 !important
+
     +maxWidth900()
       position: fixed
-      right: 45px
+      right: -100%
       bottom: 30px
       z-index: 100
-      display: none
+      max-height: calc(100% - 60px)
       width: $toc-mobile-width
+      opacity: 0
       transform-origin: right bottom
-      animation: toc-open .3s
-
-      .toc-child
-        display: block !important
 
     .toc-content
       overflow-y: auto
       max-height: calc(100vh - 120px)
+
+      +maxWidth900()
+        max-height: calc(100vh - 140px)
+
+      .toc-child
+        display: none
+
+        +maxWidth900()
+          display: block !important
+
+      .toc-item
+        &.active
+          .toc-child
+            display: block
 
       ol,
       li
@@ -314,6 +311,40 @@
         font-style: italic
         font-size: 1.2rem
 
+  :only-child
+    > .card-widget
+      margin-top: 0
+
+  .card-more-btn
+    float: right
+    color: inherit
+
+    &:hover
+      animation: more-btn-move 1s infinite
+
+.avatar-img
+  overflow: hidden
+  margin: 0 auto
+  width: 110px
+  height: 110px
+  border-radius: 70px
+
+  img
+    height: 100%
+    transition: all .5s
+    object-fit: cover
+
+    &:hover
+      transform: rotate(360deg)
+
+@keyframes more-btn-move
+  0%,
+  100%
+    transform: translateX(0)
+
+  50%
+    transform: translateX(3px)
+
 @keyframes toc-open
   0%
     transform: scale(.7)
@@ -333,8 +364,37 @@
     .layout
       justify-content: center
 
-      > .aside_content
+      > .aside-content
         display: none
 
       > div:first-child
         width: 80%
+
+.page
+  .sticky_layout
+    display: flex
+    flex-direction: column
+
+  if hexo-config('aside.card_recent_post.sort_order')
+    .card-recent-post
+      order: hexo-config('aside.card_recent_post.sort_order')
+
+  if hexo-config('newest_comments.sort_order')
+    #card-newest-comments
+      order: hexo-config('newest_comments.sort_order')
+
+  if hexo-config('aside.card_categories.sort_order')
+    .card-categories
+      order: hexo-config('aside.card_categories.sort_order')
+
+  if hexo-config('aside.card_tags.sort_order')
+    .card-tags
+      order: hexo-config('aside.card_tags.sort_order')
+
+  if hexo-config('aside.card_archives.sort_order')
+    .card-archives
+      order: hexo-config('aside.card-archives.sort_order')
+
+  if hexo-config('aside.card_webinfo.sort_order')
+    .card-webinfo
+      order: hexo-config('aside.card_webinfo.sort_order')

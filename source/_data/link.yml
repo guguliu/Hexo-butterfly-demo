@@ -5,10 +5,11 @@
       link: https://jerryc.me/
       avatar: https://jerryc.me/image/avatar.png
       descr: 今日事,今日畢
-    - name: guguge
-      link: https://gugugu.top/
+    - name: GuGuGe
+      link: https://guguge.top
       avatar: https://guguge.top/media/avatar.jpg
       descr: 咕咕咕
+
 
 - class_name: 网站
   class_desc: 一些值得推荐的站点
