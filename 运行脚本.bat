@@ -14,12 +14,14 @@ if %input%==3 goto C
 if %input%==4 goto D
 
 :A
-echo ===========================
-echo 请选择安装方式：
-echo ===========================
-echo 1.npm【速度随缘】
-echo 2.cnpm【速度最快】
-echo 3.yarn【速度一般】
+cls
+echo ======================================================
+echo 请选择安装方式【下载慢或者下载失败请选择cnpm 或 yarn模式】：
+echo ======================================================
+echo 1.npm
+echo 2.cnpm
+echo 3.yarn
+echo.
 set /p install="使用哪种安装方式？1/2/3： "
 if %install%==1 (
 npm install
